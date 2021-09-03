@@ -1,20 +1,3 @@
-/**
- * @instruction
- * 1. *このファイルにあらかじめ書かれている定義がそれぞれ何を意味しているのかコメントに説明を書く
- * 2. 全部のポケモンを返すエンドポイントを作成する
- * 3. ポケモンを追加するエンドポイントを作成する
- * 4. ポケモンを削除するエンドポイントを作成する
- * 5. ポケモンの名前を変更するエンドポイントを作成する
- * 6. query を使用して、指定した名前のポケモンのデータを返すエンドポイントを作成する
- * 7. parameter を使用して、指定した id のポケモンを返すエンドポイントを作成する
- * 8. 使用したそれぞれのメソッドのドキュメントをコメントに書く (line: 21-22)
- * GET: retrieve info, POST: create a resource, PUT: update a resource, DELETE: delete a resource
- * 9.  Week5 のアセスメントを見返して、Knex.js を使用してデータベースに接続する 
- * 10.???? req.body　, req.query ?KEY=VALUE, req.params /:VALUE
- */
-
-
-
 const knex = require("./knex");
 const express = require("express");
 //importing express
@@ -61,9 +44,8 @@ app.get("/items", async (req, res) => {
     }
 });
 
-app.post("/item", async (req, res) => {
+app.post("/items", async (req, res) => {
     try {
-        console.log("req.body is ", req.body)
         const data = await knex.select('*').from('closet')
         data.push(req.body)
 
@@ -74,6 +56,47 @@ app.post("/item", async (req, res) => {
     } catch (err) {
         console.log(err)
     }
+});
+
+app.delete('/items/:id', async (req, res) => {
+    try {
+        const data = await knex.select('*').from('closet')
+
+        for (let obj of data) {
+
+            if (obj.id === parseInt(req.params.id)) {
+                let indexOfObj = data.indexOf(obj)
+                data.splice(indexOfObj, 1)
+            }
+        }
+
+        res.status(200);
+        res.send(data);
+    }
+    catch (err) {
+        console.log(err)
+    }
+});
+
+app.patch("/items/:id", async (req, res) => {
+    try {
+        const data = await knex.select('*').from('closet')
+        let resultObj;
+        for (let obj of data) {
+
+            if (obj.id === parseInt(req.params.id)) {
+                resultObj = req.body
+            }
+        }
+
+        res.status(200);
+        res.send(resultObj);
+    }
+    catch (err) {
+        console.log(err)
+    }
+
+
 });
 
 
