@@ -1,4 +1,6 @@
-const knex = require("./knex");
+const knex = require("knex");
+const knexFile = require("./knexfile");
+knex(knexFile);
 const express = require("express");
 //importing express
 
