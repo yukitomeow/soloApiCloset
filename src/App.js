@@ -11,7 +11,8 @@ export default function App() {
         axios.get("/items")//if I deploy to heroku i can do relative path ("/items")
             .then(response => response.data)
             .then(data => setClosetData(data))
-    }, [])
+
+    }, [closetData])
 
     return (
         <div className="app-container">
@@ -25,16 +26,23 @@ export default function App() {
                     </tr>
                 </thead>
                 <tbody>
-                    {closetData.map((closetItem) => (
+                    {/* {closetData.map((closetItem) => (
                         <tr>
                             <td>{closetItem.id}</td>
                             <td>{closetItem.type}</td>
                             <td>{closetItem.color}</td>
                             <td>{closetItem.season}</td>
                         </tr>
-                    ))}
+                    ))} */}
+                    <tr>
+                        <td>1</td>
+                        <td>Dress</td>
+                        <td>Pink</td>
+                        <td>0</td>
 
+                    </tr>
                 </tbody>
+
             </table>
             <h2>Add an item</h2>
             <form>

@@ -1,6 +1,6 @@
 const knex = require("knex")(require("./knexfile"));
 const express = require("express");
-const cors = require("cors");//ports confricting
+const cors = require("cors");//ports confricting 
 //importing express
 
 // Importing JSON data
