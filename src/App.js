@@ -3,20 +3,15 @@ import React from 'react'
 import "./styles.css"
 import axios from 'axios'
 
-
 export default function App() {
+
+    const [closetData, setClosetData] = useState();
 
     useEffect(() => {//instead of using fetch use Axios
         axios.get("/items")//if I deploy to heroku i can do relative path ("/items")
             .then(response => response.data)
-            .then(data => data)
+            .then(data => setClosetData(data))
     }, [])
-
-    const [closetData, setClosetData] = useState(data)
-
-
-
-
 
     return (
         <div className="app-container">
@@ -30,14 +25,42 @@ export default function App() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Dress</td>
-                        <td>Pink</td>
-                        <td>0</td>
-                    </tr>
+                    {closetData.map((closetItem) => (
+                        <tr>
+                            <td>{closetItem.id}</td>
+                            <td>{closetItem.type}</td>
+                            <td>{closetItem.color}</td>
+                            <td>{closetItem.season}</td>
+                        </tr>
+                    ))}
+
                 </tbody>
             </table>
+            <h2>Add an item</h2>
+            <form>
+                <input
+                    type="text"
+                    name="type"
+                    required="required"
+                    placeholder="Enter a type.."
+
+                />
+                <input
+                    type="text"
+                    name="color"
+                    required="required"
+                    placeholder="Enter a color.."
+                // onChange={handleAddFormChange}
+                />
+                <input
+                    type="text"
+                    name="season"
+                    required="required"
+                    placeholder="Enter a season.."
+                // onChange={handleAddFormChange}
+                />
+                <button type="submit">Add</button>
+            </form>
         </div>
     )
 }
