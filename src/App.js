@@ -7,15 +7,17 @@ export default function App() {
 
     const [closetData, setClosetData] = useState();
 
+
     useEffect(() => {//instead of using fetch use Axios
         axios.get("/items")//if I deploy to heroku i can do relative path ("/items")
             .then(response => response.data)
             .then(data => setClosetData(data))
 
-    }, [closetData])
+    }, [])
 
     return (
         <div className="app-container">
+            <a href="https://github.com/yukitomeow/soloApiCloset/blob/main/README.md" target="_blank">Link to github</a>
             <table>
                 <thead>
                     <tr>
