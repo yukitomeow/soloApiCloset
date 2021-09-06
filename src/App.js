@@ -17,7 +17,7 @@ export default function App() {
 
     return (
         <div className="app-container">
-            <a href="https://github.com/yukitomeow/soloApiCloset/blob/main/README.md" target="_blank">Link to github</a>
+            <a href="https://github.com/yukitomeow/soloApiCloset" target="_blank">Link to github</a>
             <table>
                 <thead>
                     <tr>
